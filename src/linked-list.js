@@ -14,7 +14,7 @@ class LinkedList {
             this._tail.next = new Node(data, this._tail, null);
             this._tail = this._tail.next;
         }
-        //this._tail.index = this.length;
+        this._tail.index = this.length;
         this.length++;
         return this;
     }
@@ -79,6 +79,7 @@ class LinkedList {
             temp = entry.prev;
             entry.prev = entry.next;
             entry.next = temp;
+            entry.index = this.length - 1 - entry.index;
             if (!entry.prev) {
                 this._head = entry;
             }
@@ -98,13 +99,10 @@ class LinkedList {
     [Symbol.iterator]() {
         let entry = this._head;
         let res;
-        let index = 0;
         return {
             next() {
                 if (entry) {
                     res = entry;
-                    res.index = index;
-                    index++;
                     entry = entry.next;
                     return {
                         done: false,
