@@ -42,7 +42,7 @@ class LinkedList {
             }
             if (entry.index == index) {
                 if (entry == this._head) {
-                    entry.prev = new Node(data, null, entry);
+                    this._head = entry.prev = new Node(data, null, entry);
                 } else {
                     entry.prev.next = new Node(data, entry.prev, entry);
                     entry.prev.next.index = index;
