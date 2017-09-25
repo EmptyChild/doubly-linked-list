@@ -37,15 +37,19 @@ class LinkedList {
 
     insertAt(index, data) {
         for (let entry of this) {
-            if (entry.index == index) {
-                entry.prev.next = new Node(data, entry.prev, entry);
-                entry.prev.next.index = index;
-                entry.prev = entry.prev.next;
-                entry.index++;
-                this.length++;
-            }
             if (entry.index > index) {
                 entry.index++;
+            }
+            if (entry.index == index) {
+                if (entry == this._head) {
+                    entry.prev = new Node(data, null, entry);
+                } else {
+                    entry.prev.next = new Node(data, entry.prev, entry);
+                    entry.prev.next.index = index;
+                    entry.prev = entry.prev.next;
+                }
+                entry.index++;
+                this.length++;
             }
         }
         return this;
